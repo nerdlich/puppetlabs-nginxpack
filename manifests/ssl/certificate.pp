@@ -101,13 +101,13 @@ define nginxpack::ssl::certificate (
   if $ssl_key_source {
     file { "/etc/nginx/ssl/${name}.key":
       ensure => file,
-      mode   => '0644',
+      mode   => '0600',
       source => $ssl_key_source,
     }
   } else {
     file { "/etc/nginx/ssl/${name}.key":
       ensure  => file,
-      mode    => '0644',
+      mode    => '0600',
       content => $ssl_key_content,
     }
   }
