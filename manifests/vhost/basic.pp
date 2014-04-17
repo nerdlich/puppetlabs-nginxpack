@@ -106,6 +106,10 @@
 #   already exist.
 #   Default: /var/www/<name>/
 #
+# [*owner*]
+#   User that owns the files_dir. The user must already exist.
+#   Default: root
+#
 # === Examples
 #
 #   nginxpack::vhost::basic { 'blog':
@@ -172,7 +176,8 @@ define nginxpack::vhost::basic (
   $add_config_content = false,
   $htpasswd           = false,
   $forbidden          = false,
-  $files_dir          = "/var/www/${name}/"
+  $files_dir          = "/var/www/${name}/",
+  $owner              = 'root'
 ) {
 
   if ($ssl_cert_source or $ssl_key_source or $ssl_cert_content
@@ -235,7 +240,7 @@ define nginxpack::vhost::basic (
   }
 
   exec { "mkdir_${files_dir}":
-    command => "/bin/mkdir -p ${files_dir}",
+    command => "su - $owner -c \"/bin/mkdir -p ${files_dir}\"",
     unless  => "/usr/bin/test -d ${files_dir}",
   }
 
