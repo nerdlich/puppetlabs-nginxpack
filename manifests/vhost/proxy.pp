@@ -69,6 +69,13 @@
 #   Default (https = false): 80
 #   Default (https = true): 443
 #
+# [*injectionsafe*]
+#   Apply a set of URL protections to avoid XSS injections. These restrictions
+#   might be incompatible with your applications.
+#   See http://www.howtoforge.com/nginx-how-to-block-exploits-sql-injections
+#      -file-injections-spam-user-agents-etc
+#   Default: false
+#
 # [*add_config_source*]
 #   See the parameter definition with vhost::basic/add_config_source.
 #   Default: false
@@ -129,6 +136,7 @@ define nginxpack::vhost::proxy (
   $ipv4               = false,
   $port               = -1,
   $upload_max_size    = '10M',
+  $injectionsafe      = false,
   $add_config_source  = false,
   $add_config_content = false
 ) {

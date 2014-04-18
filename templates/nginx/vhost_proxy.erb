@@ -21,6 +21,10 @@ server {
   access_log /var/log/nginx/<%= @name %>_proxy/access.log;
   error_log /var/log/nginx/<%= @name %>_proxy/errors.log;
 
+  <% if @injectionsafe then -%>
+  include /etc/nginx/include/attacks.conf;
+  <% end -%>
+
   client_max_body_size <%= @upload_max_size %>;
 
   <% if @https then -%>
