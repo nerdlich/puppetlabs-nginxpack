@@ -76,6 +76,11 @@
 #      -file-injections-spam-user-agents-etc
 #   Default: false
 #
+# [*whitelisted_ips*]
+#   Configure an array of IP or network addresses that are allowed to access
+#   this vhost. All others are denied
+#   Default: false
+#
 # [*add_config_source*]
 #   See the parameter definition with vhost::basic/add_config_source.
 #   Default: false
@@ -137,6 +142,7 @@ define nginxpack::vhost::proxy (
   $port               = -1,
   $upload_max_size    = '10M',
   $injectionsafe      = false,
+  $whitelisted_ips    = false,
   $add_config_source  = false,
   $add_config_content = false
 ) {

@@ -67,9 +67,18 @@ server {
   location ~ / {
     index index index.html<%= @use_php ? ' index.php' : '' %>;
 
-    <% if @htpasswd then -%>
+    <%- if @whitelisted_ips && @htpasswd then -%>
+    satisfy any;
+    <%- end -%>
+    <%- if @htpasswd then -%>
     auth_basic              "Restricted";
     auth_basic_user_file    /etc/nginx/htpasswd/<%= @name %>;
-    <% end -%>
+    <%- end -%>
+    <%- if @whitelisted_ips then -%>
+    <%- @whitelisted_ips.each do |ip| -%>
+    allow <%= ip %>;
+    <%- end -%>
+    deny all;
+    <%- end -%>
   }
 }

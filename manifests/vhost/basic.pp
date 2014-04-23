@@ -101,6 +101,11 @@
 #   you should use forbidden => [ '^/logs/' ].
 #   Default: false
 #
+# [*whitelisted_ips*]
+#   Configure an array of IP or network addresses that are allowed to access
+#   this vhost. All others are denied
+#   Default: false
+#
 # [*files_dir*]
 #   Location of the website content. Directories will be created if it do not
 #   already exist.
@@ -176,6 +181,7 @@ define nginxpack::vhost::basic (
   $add_config_content = false,
   $htpasswd           = false,
   $forbidden          = false,
+  $whitelisted_ips    = false,
   $files_dir          = "/var/www/${name}/",
   $owner              = 'root'
 ) {

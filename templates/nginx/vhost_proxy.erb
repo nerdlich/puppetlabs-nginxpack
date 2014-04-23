@@ -43,6 +43,12 @@ server {
   <% end -%>
 
   location / {
+    <%- if @whitelisted_ips then -%>
+    <%- @whitelisted_ips.each do |ip| -%>
+    allow <%= ip %>;
+    <%- end -%>
+    deny all;
+    <%- end -%>
     proxy_pass http<%= @to_https ? 's' : '' %>://<%= @to_domainval %>:<%= @to_portval %>/;
     proxy_redirect          off;
     # proxy_set_header        Host            $host;
