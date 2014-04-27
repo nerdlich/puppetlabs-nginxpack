@@ -84,6 +84,12 @@
 #   parameter must be false.
 #   Default: false
 #
+# [*omit_default_root_location*]
+#   Some applications need a configuration for 'location /' that conflicts with
+#   the default configuration in this template. Omit the default and configure
+#   in your added config source by setting this to true.
+#   Default: false
+#
 # [*add_config_content*]
 #   Set the custom additional config directly from a string. If not false then
 #   the previous parameter must be false.
@@ -179,6 +185,7 @@ define nginxpack::vhost::basic (
   $use_php            = false,
   $add_config_source  = false,
   $add_config_content = false,
+  $omit_default_root_location = false,
   $htpasswd           = false,
   $forbidden          = false,
   $whitelisted_ips    = false,

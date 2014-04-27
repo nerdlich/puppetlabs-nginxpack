@@ -64,6 +64,7 @@ server {
   }
   <% end -%>
 
+<%- if !@omit_default_root_location -%>
   location ~ / {
     index index index.html<%= @use_php ? ' index.php' : '' %>;
 
@@ -81,4 +82,5 @@ server {
     deny all;
     <%- end -%>
   }
+<%- end -%>
 }
